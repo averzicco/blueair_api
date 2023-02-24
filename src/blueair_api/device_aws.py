@@ -64,7 +64,7 @@ class DeviceAws(CallbacksMixin):
         states = convert_api_array_to_dict(info["states"])
         self.running = states["standby"] is False
         self.night_mode = states["nightmode"]
-        self.germ_shield = states["germshield"]
+        self.germ_shield = safely_get_json_value(states, "germshield", bool)
         self.brightness = safely_get_json_value(states, "brightness", int)
         self.child_lock = states["childlock"]
         self.fan_speed = safely_get_json_value(states, "fanspeed", int)
